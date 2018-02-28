@@ -2,8 +2,8 @@
    ################################################################
    # metaqa: A program for comparing any source data
    #         with any target data by using SQL.
-   # Copyright (C) 2006, 2007, 2008  Woolworths (PTY) Ltd. South Africa.
-   # Contact obscured Email address: wwmbes at Woolworths dot co dot za
+   # Copyright (C) 2006, 2007, 2008  Mark Besaans. South Africa.
+   # Contact obscured Email address: markbesaans at gmail.com
    #
    # This program is free software; you can redistribute it and/or
    # modify it under the terms of the GNU General Public License
@@ -44,7 +44,7 @@
  *      in two days flat in 2006 and grew in scope and functionality from there.
  *      Later, the scope widened to other databases which led to this
  *      version, which is almost a line by line translation of the
- *      original 4GL into Java, (by a Java and OO newbie programmer).
+ *      original 4GL into Java, (by a Java and OOP newbie programmer).
  *      What it needs is to be re-concieved and redesigned from the
  *      ground up, with the 20/20 vision of hindsight... time permitting.
  *      In the mean time, it will be enhanced and debugged as immediate
