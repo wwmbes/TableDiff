@@ -1,0 +1,88 @@
+This is an attempt to get bing Co-pilot to generate a Python version of metaqa
+
+
+Sure! Here's the updated Python code that includes reading SQL statements from two files provided as command-line parameters:
+
+### Updated Python Code
+```python
+import sqlite3
+import sys
+
+def convert_type(value):
+    """Convert data types to a common format for comparison."""
+    try:
+        return float(value)
+    except ValueError:
+        return str(value)
+
+def read_sql_from_file(filename):
+    """Read SQL statement from a file."""
+    with open(filename, 'r') as file:
+        return file.read()
+
+def main():
+    if len(sys.argv) != 3:
+        print("Usage: python script.py <sql_file1> <sql_file2>")
+        return
+
+    sql_file1 = sys.argv[1]
+    sql_file2 = sys.argv[2]
+
+    try:
+        # Read SQL statements from files
+        sql_query1 = read_sql_from_file(sql_file1)
+        sql_query2 = read_sql_from_file(sql_file2)
+
+        # Establish first database connection
+        conn1 = sqlite3.connect('your_database1.db')
+        cursor1 = conn1.cursor()
+
+        # Execute a query on the first database
+        cursor1.execute(sql_query1)
+        rows1 = cursor1.fetchall()
+
+        # Establish second database connection
+        conn2 = sqlite3.connect('your_database2.db')
+        cursor2 = conn2.cursor()
+
+        # Execute a query on the second database
+        cursor2.execute(sql_query2)
+        rows2 = cursor2.fetchall()
+
+        # Perform comparison logic
+        for row1 in rows1:
+            match_found = False
+            for row2 in rows2:
+                # Assuming both tables have the same structure and column names
+                if all(convert_type(row1[i]) == convert_type(row2[i]) for i in range(len(row1))):
+                    match_found = True
+                    break
+            if match_found:
+                print(f"Match found for row: {row1}")
+            else:
+                print(f"No match found for row: {row1}")
+
+        # Close the connections
+        conn1.close()
+        conn2.close()
+    except Exception as e:
+        print(e)
+
+if __name__ == "__main__":
+    main()
+```
+
+### Explanation
+1. **Command-Line Arguments**: The script expects two command-line arguments, which are the filenames containing the SQL statements.
+2. **read_sql_from_file Function**: This function reads the SQL statement from a given file.
+3. **Main Function**: The main function reads the SQL statements from the provided files, executes them on the respective databases, and performs the comparison logic.
+
+### Usage
+To run the script, use the following command in your terminal:
+```sh
+python script.py sql_file1.sql sql_file2.sql
+```
+
+Replace `sql_file1.sql` and `sql_file2.sql` with the actual filenames containing your SQL queries.
+
+If you have any further questions or need additional modifications, feel free to ask!
